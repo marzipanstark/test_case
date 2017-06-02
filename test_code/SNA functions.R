@@ -7,6 +7,7 @@ library(igraph)
 fix.date.updated <- function(data.vector) { 
   dash.dates = gsub("/","-",data.vector)
   updates <- strsplit(dash.dates,"-")
+  # test comment
   # create a matrix of day - month - year separated out
   date.matrix = matrix(0,nrow = length(data.vector),ncol = 3)
   for (i in 1:length(data.vector)){
