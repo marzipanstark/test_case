@@ -16,7 +16,7 @@ active.network <- find.active.guys(from.to.count,legit.froms,active.number)
 write.csv(active.network,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys.csv",row.names=FALSE)
 write.csv(active.this.year,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys_this year.csv",row.names=FALSE)
 write.csv(active.this.month,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys_this month.csv",row.names=FALSE)
-
+# test comment
 # now connect the unique network users back to their network connections
 nw.all.time <- connect.user2network(legit.froms,clean.nets)
 nw.this.year <- connect.user2network(froms.this.year,nets.this.year)
