@@ -13,8 +13,8 @@ library(igraph)
 
 ##########################################################################################################
 ########################  stats just from jan 1 this.year (2017 now)
-#num.months <- 2
-num.months <- 1
+num.months <- 2
+#num.months <- 1
 #
 #keep.internals <- 1 # means yes, keep them
 keep.internals <- 0 # means no, don't keep them
@@ -55,9 +55,8 @@ if (keep.internals == 1){
 legit.froms <- connect.user(clean.nets$from_user_guid,users.oi)
 legit.tos <- connect.user(clean.nets$to_user_guid,users.oi)
 nets.this.year <- clean.nets[which(clean.nets$created.year == this.year),]
-if (num.months == 1){
-  nets.this.month <- nets.this.year[which(nets.this.year$created.month == this.month),]
-}
+nets.this.month <- nets.this.year[which(nets.this.year$created.month == this.month),]
+
 if (num.months == 2){
   nets.prev.month <- nets.this.year[which(nets.this.year$created.month == prev.month),]
   nets.2.months <- rbind(nets.prev.month,nets.this.month)

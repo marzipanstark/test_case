@@ -12,10 +12,17 @@ active.number <- 20
 active.this.year <- find.active.guys(from.to.count.this.year,froms.this.year,active.number)
 active.number <- 100
 active.network <- find.active.guys(from.to.count,legit.froms,active.number)
+
+file.prefix <- "C:/Users/Becky.Stark/Documents/Data Science Shared/"
 #
-write.csv(active.network,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys.csv",row.names=FALSE)
-write.csv(active.this.year,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys_this year.csv",row.names=FALSE)
-write.csv(active.this.month,"C:/Users/Becky.Stark/Documents/Data Science Shared/active network guys_this month.csv",row.names=FALSE)
+write.csv(active.network,
+          paste(file.prefix,  "active network guys.csv"),row.names=FALSE)
+write.csv(active.this.year,
+          paste(file.prefix, "active network guys_this year.csv"),
+          row.names=FALSE)
+write.csv(active.this.month,
+          paste(file.prefix, "active network guys_this month.csv"),
+          row.names=FALSE)
 # test comment
 # now connect the unique network users back to their network connections
 nw.all.time <- connect.user2network(legit.froms,clean.nets)
@@ -26,14 +33,18 @@ these.pairs.this.month <- nw.this.month[,c(1,9:17,22:27)]
 links.this.month <- these.pairs.this.month[,c(1,2,9,10)]
 q <- which(is.na(links.this.month$firstname))
 for (i in 1:length(q)){
-  this.index <- which(users.abr$users.guid == links.this.month$from_user_guid[q[i]])
+  this.index <- (
+    which(users.abr$users.guid == links.this.month$from_user_guid[q[i]]))
   if (length(this.index) == 1){
     links.this.month$firstname[q[i]] <- users.abr$firstname[this.index]
     links.this.month$lastname[q[i]] <- users.abr$lastname[this.index]
   }
 }
 
-nodes.this.month <- unique(c(links.this.month[,1],links.this.month[,2])) # collect the from user ids and the to user ids
+# collect the from user ids and the to user ids
+nodes.this.month <- unique(c(links.this.month[,1],links.this.month[,2]))
+
+
 # get network for the year
 these.pairs.this.year <- nw.this.year[,c(1,9:17,22:27)] 
 links.this.year <- these.pairs.this.year[,c(1,2,9,10)]
@@ -46,6 +57,8 @@ for (i in 1:length(q)){
   }
 }
 
+
+
 nodes.this.year <- unique(c(links.this.year[,1],links.this.year[,2]))
 write.csv(these.pairs.this.month,"C:/Users/Becky.Stark/Documents/Data Science Shared/this month pairs.csv",row.names=FALSE)
 write.csv(links.this.month,"C:/Users/Becky.Stark/Documents/Data Science Shared/edges this month.csv",row.names=FALSE)
@@ -56,6 +69,9 @@ write.csv(links.this.year,"C:/Users/Becky.Stark/Documents/Data Science Shared/ed
 write.csv(nodes.this.year,"C:/Users/Becky.Stark/Documents/Data Science Shared/nodes this year.csv",row.names=FALSE)
 nodes.this.year <- read.csv("C:/Users/Becky.Stark/Documents/Data Science Shared/nodes this year.csv", header=T, as.is=T)
 links.this.year <- read.csv("C:/Users/Becky.Stark/Documents/Data Science Shared/edges this year.csv", header=T, as.is=T)
+
+
+
 ##############################
 
 # install.packages("igraph")
